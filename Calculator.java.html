@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>Calculator.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Calculator.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java.util.Scanner</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.LinkedHashMap</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.Map</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">Calculator {</span>
+    <span class="s0">static </span><span class="s1">Scanner scanner = </span><span class="s0">new </span><span class="s1">Scanner (System.in)</span><span class="s0">;</span>
+
+    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
+        <span class="s0">int </span><span class="s1">a = getInt()</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">b = getInt()</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">m = RomanNumerals()</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">z = RomanNumerals()</span><span class="s0">;</span>
+        <span class="s0">char </span><span class="s1">operation = getOperation()</span><span class="s0">;</span>
+         <span class="s0">int </span><span class="s1">result = calc(a</span><span class="s0">, </span><span class="s1">b</span><span class="s0">, </span><span class="s1">operation)</span><span class="s0">;</span>
+         <span class="s0">int </span><span class="s1">result2 = calc2(m</span><span class="s0">, </span><span class="s1">z</span><span class="s0">, </span><span class="s1">operation)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Operation result: &quot;</span><span class="s1">+ result)</span><span class="s0">;</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Operation result: &quot;</span><span class="s1">+ result2)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static </span><span class="s1">String RomanNumerals(</span><span class="s0">int </span><span class="s1">Int) {</span>
+        <span class="s1">LinkedHashMap&lt;String</span><span class="s0">, </span><span class="s1">Integer&gt; roman_numerals = </span><span class="s0">new </span><span class="s1">LinkedHashMap&lt;String</span><span class="s0">, </span><span class="s1">Integer&gt;()</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;M&quot;</span><span class="s0">, </span><span class="s3">1000</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;CM&quot;</span><span class="s0">, </span><span class="s3">900</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;D&quot;</span><span class="s0">, </span><span class="s3">500</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;CD&quot;</span><span class="s0">, </span><span class="s3">400</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;C&quot;</span><span class="s0">, </span><span class="s3">100</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;XC&quot;</span><span class="s0">, </span><span class="s3">90</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;L&quot;</span><span class="s0">, </span><span class="s3">50</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;XL&quot;</span><span class="s0">, </span><span class="s3">40</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;X&quot;</span><span class="s0">, </span><span class="s3">10</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;IX&quot;</span><span class="s0">, </span><span class="s3">9</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;V&quot;</span><span class="s0">, </span><span class="s3">5</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;IV&quot;</span><span class="s0">, </span><span class="s3">4</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">roman_numerals.put(</span><span class="s2">&quot;I&quot;</span><span class="s0">, </span><span class="s3">1</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">StringBuilder res = </span><span class="s0">new </span><span class="s1">StringBuilder()</span><span class="s0">;</span>
+        <span class="s0">for</span><span class="s1">(Map.Entry&lt;String</span><span class="s0">, </span><span class="s1">Integer&gt; entry : roman_numerals.entrySet()){</span>
+            <span class="s0">int </span><span class="s1">matches = Int/entry.getValue()</span><span class="s0">;</span>
+            <span class="s1">res.append(repeat(entry.getKey()</span><span class="s0">, </span><span class="s1">matches))</span><span class="s0">;</span>
+            <span class="s1">Int = Int % entry.getValue()</span><span class="s0">;</span>
+
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s3">1</span><span class="s0">;</span><span class="s1">i&lt;</span><span class="s3">10</span><span class="s0">;</span><span class="s1">i++) {</span>
+                <span class="s1">System.out.println(</span><span class="s2">&quot;i=&quot;</span><span class="s1">+i+</span><span class="s2">&quot; -&gt; &quot;</span><span class="s1">+RomanNumerals(i))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">res.toString()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">public static </span><span class="s1">String repeat(String s</span><span class="s0">, int </span><span class="s1">n) {</span>
+        <span class="s0">if</span><span class="s1">(s == </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s0">return null;</span>
+        <span class="s1">}</span>
+        <span class="s0">final </span><span class="s1">StringBuilder sb = </span><span class="s0">new </span><span class="s1">StringBuilder()</span><span class="s0">;</span>
+        <span class="s0">for</span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s3">0</span><span class="s0">; </span><span class="s1">i &lt; n</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s1">sb.append(s)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">sb.toString()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static int </span><span class="s1">getInt() {</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter any number&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">number</span><span class="s0">;</span>
+        <span class="s0">if</span><span class="s1">(scanner.hasNextInt()){</span>
+            <span class="s1">number = scanner.nextInt()</span><span class="s0">;</span>
+
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error. Try again.&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">scanner.next()</span><span class="s0">;</span>
+            <span class="s1">number = getInt()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">number</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public static char </span><span class="s1">getOperation(){</span>
+        <span class="s1">System.out.println(</span><span class="s2">&quot;Enter operation:&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">char </span><span class="s1">operation</span><span class="s0">;</span>
+        <span class="s0">if</span><span class="s1">(scanner.hasNext()){</span>
+            <span class="s1">operation = scanner.next().charAt(</span><span class="s3">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">System.out.println(</span><span class="s2">&quot;Error. Try again&quot;</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">scanner.next()</span><span class="s0">;</span>
+            <span class="s1">operation = getOperation()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+        <span class="s0">return </span><span class="s1">operation</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">public static int </span><span class="s1">calc2(</span><span class="s0">int </span><span class="s1">m</span><span class="s0">,int </span><span class="s1">z</span><span class="s0">, char </span><span class="s1">operation){</span>
+        <span class="s0">int </span><span class="s1">result2</span><span class="s0">;</span>
+        <span class="s0">switch </span><span class="s1">(operation){</span>
+            <span class="s0">case </span><span class="s2">'+'</span><span class="s1">:</span>
+                <span class="s1">result2 = m+z</span><span class="s0">;</span>
+                <span class="s0">break;</span>
+            <span class="s0">case </span><span class="s2">'-'</span><span class="s1">:</span>
+                <span class="s1">result2 = m-z</span><span class="s0">;</span>
+                <span class="s0">break;</span>
+            <span class="s0">case </span><span class="s2">'*'</span><span class="s1">:</span>
+                <span class="s1">result2 = m*z</span><span class="s0">;</span>
+                <span class="s0">break;</span>
+            <span class="s0">case </span><span class="s2">'/'</span><span class="s1">:</span>
+                <span class="s1">result2 = m/z</span><span class="s0">;</span>
+                <span class="s0">break;</span>
+            <span class="s0">default</span><span class="s1">:</span>
+                <span class="s1">System.out.println(</span><span class="s2">&quot;Operation unknown. Try again&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">result2 = calc2(m</span><span class="s0">, </span><span class="s1">z</span><span class="s0">, </span><span class="s1">getOperation())</span><span class="s0">;</span>
+
+        <span class="s1">}</span>
+
+
+        <span class="s0">return </span><span class="s1">result2</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">public static int </span><span class="s1">calc(</span><span class="s0">int </span><span class="s1">a</span><span class="s0">,int </span><span class="s1">b</span><span class="s0">, char </span><span class="s1">operation){</span>
+        <span class="s0">int </span><span class="s1">result</span><span class="s0">;</span>
+        <span class="s0">switch </span><span class="s1">(operation){</span>
+            <span class="s0">case </span><span class="s2">'+'</span><span class="s1">:</span>
+                <span class="s1">result = a+b</span><span class="s0">;</span>
+                <span class="s0">break;</span>
+            <span class="s0">case </span><span class="s2">'-'</span><span class="s1">:</span>
+                <span class="s1">result = a-b</span><span class="s0">;</span>
+                <span class="s0">break;</span>
+            <span class="s0">case </span><span class="s2">'*'</span><span class="s1">:</span>
+                <span class="s1">result = a*b</span><span class="s0">;</span>
+                <span class="s0">break;</span>
+            <span class="s0">case </span><span class="s2">'/'</span><span class="s1">:</span>
+                <span class="s1">result = a/b</span><span class="s0">;</span>
+                <span class="s0">break;</span>
+            <span class="s0">default</span><span class="s1">:</span>
+                <span class="s1">System.out.println(</span><span class="s2">&quot;Operation unknown. Try again&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">result = calc(a</span><span class="s0">, </span><span class="s1">b</span><span class="s0">, </span><span class="s1">getOperation())</span><span class="s0">;</span>
+
+        <span class="s1">}</span>
+
+
+        <span class="s0">return </span><span class="s1">result</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+
+</pre>
+</body>
+</html>
